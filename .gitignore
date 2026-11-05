@@ -12,3 +12,17 @@ venv/
 results/
 *.backup
 *.phase3_backup
+.env
+.env.*
+*.pem
+*.key
+certs/
+results/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+*.egg-info/
+apply_phase31.py
