@@ -1,0 +1,42 @@
+[
+  {
+    "id": "concat_null_incorrect",
+    "description": "Deliberately wrong candidate: CONCAT ignores NULL in DuckDB while || propagates NULL",
+    "setup_sql": [],
+    "expected_sql": "SELECT 'Hello' || NULL AS value",
+    "candidate_sql": "SELECT CONCAT('Hello', NULL) AS value",
+    "ordered": true
+  },
+  {
+    "id": "concat_null_correct",
+    "description": "NULL-propagating concatenation is preserved",
+    "setup_sql": [],
+    "expected_sql": "SELECT 'Hello' || NULL AS value",
+    "candidate_sql": "SELECT 'Hello' || NULL AS value",
+    "ordered": true
+  },
+  {
+    "id": "concat_rows_correct",
+    "description": "Test multiple rows including NULL values",
+    "setup_sql": ["CREATE TABLE employees(first_name VARCHAR, last_name VARCHAR)", "INSERT INTO employees VALUES ('Ada', 'Lovelace'), ('Alan', NULL), (NULL, 'Turing')"],
+    "expected_sql": "SELECT first_name || ' ' || last_name AS full_name FROM employees ORDER BY first_name NULLS LAST",
+    "candidate_sql": "SELECT first_name || ' ' || last_name AS full_name FROM employees ORDER BY first_name NULLS LAST",
+    "ordered": true
+  },
+  {
+    "id": "concat_rows_incorrect",
+    "description": "Deliberately wrong candidate on NULL rows",
+    "setup_sql": ["CREATE TABLE employees(first_name VARCHAR, last_name VARCHAR)", "INSERT INTO employees VALUES ('Ada', 'Lovelace'), ('Alan', NULL), (NULL, 'Turing')"],
+    "expected_sql": "SELECT first_name || ' ' || last_name AS full_name FROM employees ORDER BY first_name NULLS LAST",
+    "candidate_sql": "SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees ORDER BY first_name NULLS LAST",
+    "ordered": true
+  },
+  {
+    "id": "unordered_results_equivalent",
+    "description": "Unordered rowsets are compared as multisets",
+    "setup_sql": ["CREATE TABLE t(id INTEGER)", "INSERT INTO t VALUES (1), (2), (2)"],
+    "expected_sql": "SELECT id FROM t ORDER BY id ASC",
+    "candidate_sql": "SELECT id FROM t ORDER BY id DESC",
+    "ordered": false
+  }
+]

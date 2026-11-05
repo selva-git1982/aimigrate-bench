@@ -1,0 +1,272 @@
+[
+  {
+    "id": "p5_01_ifnull_customer",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT customer_id, IFNULL(customer_name, 'Unknown') AS customer_name FROM customers ORDER BY customer_id",
+    "expected_sql": "SELECT customer_id, COALESCE(customer_name, 'Unknown') AS customer_name FROM customers ORDER BY customer_id",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "p5_02_ifnull_employee",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, IFNULL(first_name, 'N/A') AS first_name FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, COALESCE(first_name, 'N/A') AS first_name FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "p5_03_concat_null_propagation",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, CONCAT(first_name, ' ', last_name) AS full_name FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, first_name || ' ' || last_name AS full_name FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_null_semantics"
+  },
+  {
+    "id": "p5_04_concat_ws",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, CONCAT_WS(' ', first_name, last_name) AS full_name FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, CONCAT_WS(' ', first_name, last_name) AS full_name FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_05_lower",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, LOWER(first_name) AS value FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, LOWER(first_name) AS value FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_06_upper",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, UPPER(last_name) AS value FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, UPPER(last_name) AS value FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_07_trim",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT TRIM('  AIMigrate  ') AS value",
+    "expected_sql": "SELECT TRIM('  AIMigrate  ') AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_08_substring",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT SUBSTRING('DatabaseMigration', 1, 8) AS value",
+    "expected_sql": "SELECT SUBSTRING('DatabaseMigration' FROM 1 FOR 8) AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_09_left",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT LEFT('PostgreSQL', 4) AS value",
+    "expected_sql": "SELECT LEFT('PostgreSQL', 4) AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_10_right",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT RIGHT('PostgreSQL', 3) AS value",
+    "expected_sql": "SELECT RIGHT('PostgreSQL', 3) AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_11_replace",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT REPLACE('AI database migration', ' ', '_') AS value",
+    "expected_sql": "SELECT REPLACE('AI database migration', ' ', '_') AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_12_length_ascii",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT LENGTH('migration') AS value",
+    "expected_sql": "SELECT LENGTH('migration') AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_13_locate",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT LOCATE('base', 'database') AS value",
+    "expected_sql": "SELECT POSITION('base' IN 'database') AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_14_abs",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT ABS(-42) AS value",
+    "expected_sql": "SELECT ABS(-42) AS value",
+    "ordered": true,
+    "category": "numeric"
+  },
+  {
+    "id": "p5_15_round",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT ROUND(12.345, 2) AS value",
+    "expected_sql": "SELECT ROUND(12.345, 2) AS value",
+    "ordered": true,
+    "category": "numeric"
+  },
+  {
+    "id": "p5_16_ceil",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT CEILING(4.2) AS value",
+    "expected_sql": "SELECT CEILING(4.2) AS value",
+    "ordered": true,
+    "category": "numeric"
+  },
+  {
+    "id": "p5_17_floor",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT FLOOR(4.8) AS value",
+    "expected_sql": "SELECT FLOOR(4.8) AS value",
+    "ordered": true,
+    "category": "numeric"
+  },
+  {
+    "id": "p5_18_mod",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT MOD(17, 5) AS value",
+    "expected_sql": "SELECT MOD(17, 5) AS value",
+    "ordered": true,
+    "category": "numeric"
+  },
+  {
+    "id": "p5_19_coalesce",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT COALESCE(NULL, NULL, 'fallback') AS value",
+    "expected_sql": "SELECT COALESCE(NULL, NULL, 'fallback') AS value",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "p5_20_nullif",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT NULLIF(10, 10) AS value",
+    "expected_sql": "SELECT NULLIF(10, 10) AS value",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "p5_21_case",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT CASE WHEN customer_name IS NULL THEN 'missing' WHEN customer_name = '' THEN 'empty' ELSE 'present' END AS status FROM customers ORDER BY customer_id",
+    "expected_sql": "SELECT CASE WHEN customer_name IS NULL THEN 'missing' WHEN customer_name = '' THEN 'empty' ELSE 'present' END AS status FROM customers ORDER BY customer_id",
+    "ordered": true,
+    "category": "conditional"
+  },
+  {
+    "id": "p5_22_count",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT COUNT(*) AS total_rows, COUNT(customer_name) AS nonnull_names FROM customers",
+    "expected_sql": "SELECT COUNT(*) AS total_rows, COUNT(customer_name) AS nonnull_names FROM customers",
+    "ordered": true,
+    "category": "aggregation"
+  },
+  {
+    "id": "p5_23_count_employees",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT COUNT(*) AS total_employees FROM employees",
+    "expected_sql": "SELECT COUNT(*) AS total_employees FROM employees",
+    "ordered": true,
+    "category": "aggregation"
+  },
+  {
+    "id": "p5_24_min_max",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT MIN(employee_id) AS min_id, MAX(employee_id) AS max_id FROM employees",
+    "expected_sql": "SELECT MIN(employee_id) AS min_id, MAX(employee_id) AS max_id FROM employees",
+    "ordered": true,
+    "category": "aggregation"
+  },
+  {
+    "id": "p5_25_group_by_null",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT first_name, COUNT(*) AS n FROM employees GROUP BY first_name ORDER BY first_name",
+    "expected_sql": "SELECT first_name, COUNT(*) AS n FROM employees GROUP BY first_name ORDER BY first_name",
+    "ordered": true,
+    "category": "aggregation"
+  },
+  {
+    "id": "p5_26_order_nulls",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, first_name FROM employees ORDER BY first_name ASC, employee_id",
+    "expected_sql": "SELECT employee_id, first_name FROM employees ORDER BY first_name ASC NULLS FIRST, employee_id",
+    "ordered": true,
+    "category": "ordering"
+  },
+  {
+    "id": "p5_27_limit",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, first_name FROM employees ORDER BY employee_id LIMIT 3",
+    "expected_sql": "SELECT employee_id, first_name FROM employees ORDER BY employee_id LIMIT 3",
+    "ordered": true,
+    "category": "pagination"
+  },
+  {
+    "id": "p5_28_date_add",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT DATE_ADD('2026-01-15', INTERVAL 7 DAY) AS value",
+    "expected_sql": "SELECT CAST('2026-01-15' AS DATE) + INTERVAL '7' DAY AS value",
+    "ordered": true,
+    "category": "date_time"
+  },
+  {
+    "id": "p5_29_datediff",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT DATEDIFF('2026-02-01', '2026-01-15') AS value",
+    "expected_sql": "SELECT CAST('2026-02-01' AS DATE) - CAST('2026-01-15' AS DATE) AS value",
+    "ordered": true,
+    "category": "date_time"
+  },
+  {
+    "id": "p5_30_extract_year_month",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT YEAR('2026-11-04') AS year_value, MONTH('2026-11-04') AS month_value",
+    "expected_sql": "SELECT EXTRACT(YEAR FROM CAST('2026-11-04' AS DATE)) AS year_value, EXTRACT(MONTH FROM CAST('2026-11-04' AS DATE)) AS month_value",
+    "ordered": true,
+    "category": "date_time"
+  }
+]

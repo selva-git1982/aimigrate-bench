@@ -1,0 +1,6 @@
+[
+  {"id":"tsql_top_1","source":"tsql","target":"postgres","sql":"SELECT TOP 5 id, name FROM customers ORDER BY id","expected_sql":"SELECT id, name FROM customers ORDER BY id LIMIT 5"},
+  {"id":"mysql_limit_1","source":"mysql","target":"postgres","sql":"SELECT id FROM orders ORDER BY id LIMIT 10","expected_sql":"SELECT id FROM orders ORDER BY id LIMIT 10"},
+  {"id":"pg_limit_1","source":"postgres","target":"mysql","sql":"SELECT id FROM products ORDER BY id LIMIT 3","expected_sql":"SELECT id FROM products ORDER BY id LIMIT 3"},
+  {"id":"tsql_isnull_1","source":"tsql","target":"postgres","sql":"SELECT ISNULL(name, 'unknown') AS label FROM customers","expected_sql":"SELECT COALESCE(name, 'unknown') AS label FROM customers"}
+]

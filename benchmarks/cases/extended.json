@@ -1,0 +1,38 @@
+
+[
+  {
+    "id": "tsql_top_2",
+    "source": "tsql",
+    "target": "postgres",
+    "sql": "SELECT TOP 10 customer_id, customer_name FROM customers ORDER BY customer_id",
+    "expected_sql": "SELECT customer_id, customer_name FROM customers ORDER BY customer_id LIMIT 10"
+  },
+  {
+    "id": "mysql_ifnull_1",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT IFNULL(customer_name, 'Unknown') AS customer_name FROM customers",
+    "expected_sql": "SELECT COALESCE(customer_name, 'Unknown') AS customer_name FROM customers"
+  },
+  {
+    "id": "pg_limit_2",
+    "source": "postgres",
+    "target": "mysql",
+    "sql": "SELECT customer_id FROM customers ORDER BY customer_id LIMIT 10",
+    "expected_sql": "SELECT customer_id FROM customers ORDER BY customer_id LIMIT 10"
+  },
+  {
+    "id": "tsql_getdate_1",
+    "source": "tsql",
+    "target": "postgres",
+    "sql": "SELECT GETDATE() AS current_time",
+    "expected_sql": "SELECT CURRENT_TIMESTAMP AS current_time"
+  },
+  {
+    "id": "mysql_concat_1",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees",
+    "expected_sql": "SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees"
+  }
+]

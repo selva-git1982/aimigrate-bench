@@ -1,0 +1,92 @@
+[
+  {
+    "id": "p5_01_ifnull_customer",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT customer_id, IFNULL(customer_name, 'Unknown') AS customer_name FROM customers ORDER BY customer_id",
+    "expected_sql": "SELECT customer_id, COALESCE(customer_name, 'Unknown') AS customer_name FROM customers ORDER BY customer_id",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "p5_02_ifnull_employee",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, IFNULL(first_name, 'N/A') AS first_name FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, COALESCE(first_name, 'N/A') AS first_name FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "p5_03_concat_null_propagation",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, CONCAT(first_name, ' ', last_name) AS full_name FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, first_name || ' ' || last_name AS full_name FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_null_semantics"
+  },
+  {
+    "id": "p5_04_concat_ws",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, CONCAT_WS(' ', first_name, last_name) AS full_name FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, CONCAT_WS(' ', first_name, last_name) AS full_name FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_05_lower",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, LOWER(first_name) AS value FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, LOWER(first_name) AS value FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_06_upper",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT employee_id, UPPER(last_name) AS value FROM employees ORDER BY employee_id",
+    "expected_sql": "SELECT employee_id, UPPER(last_name) AS value FROM employees ORDER BY employee_id",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_07_trim",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT TRIM('  AIMigrate  ') AS value",
+    "expected_sql": "SELECT TRIM('  AIMigrate  ') AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_08_substring",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT SUBSTRING('DatabaseMigration', 1, 8) AS value",
+    "expected_sql": "SELECT SUBSTRING('DatabaseMigration' FROM 1 FOR 8) AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_09_left",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT LEFT('PostgreSQL', 4) AS value",
+    "expected_sql": "SELECT LEFT('PostgreSQL', 4) AS value",
+    "ordered": true,
+    "category": "string_functions"
+  },
+  {
+    "id": "p5_10_right",
+    "source": "mysql",
+    "target": "postgres",
+    "sql": "SELECT RIGHT('PostgreSQL', 3) AS value",
+    "expected_sql": "SELECT RIGHT('PostgreSQL', 3) AS value",
+    "ordered": true,
+    "category": "string_functions"
+  }
+]

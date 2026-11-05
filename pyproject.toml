@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "aimigrate-bench"
+version = "0.1.0"
+description = "Reproducible cross-dialect SQL migration benchmark"
+requires-python = ">=3.10"
+dependencies = ["sqlglot>=25,<30"]
+[project.optional-dependencies]
+ai = ["openai>=1.50,<3"]
+test = ["pytest>=8,<10"]
+[project.scripts]
+aimigrate = "aimigrate.cli:main"
+[tool.setuptools.packages.find]
+where = ["src"]

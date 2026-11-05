@@ -1,0 +1,6 @@
+[
+  {"id":"null_concat_correct","source_sql":"SELECT CONCAT('Hello', NULL)","target_sql":"SELECT 'Hello' || NULL","ordered":false},
+  {"id":"null_concat_incorrect","source_sql":"SELECT CONCAT('Hello', NULL)","target_sql":"SELECT CONCAT('Hello', NULL)","ordered":false},
+  {"id":"simple_arithmetic","source_sql":"SELECT 2 + 3, 10 - 4","target_sql":"SELECT 2 + 3, 10 - 4","ordered":false},
+  {"id":"coalesce_null","source_sql":"SELECT COALESCE(NULL, 'fallback')","target_sql":"SELECT COALESCE(NULL, 'fallback')","ordered":false}
+]

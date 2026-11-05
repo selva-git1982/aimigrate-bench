@@ -1,0 +1,9 @@
+[
+  {
+    "id": "tsql_top_2",
+    "source": "tsql",
+    "target": "postgres",
+    "sql": "SELECT TOP 10 customer_id, customer_name FROM customers ORDER BY customer_id",
+    "expected_sql": "SELECT customer_id, customer_name FROM customers ORDER BY customer_id LIMIT 10"
+  }
+]
