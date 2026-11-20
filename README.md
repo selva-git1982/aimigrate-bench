@@ -1,5 +1,5 @@
 # AIMigrate-Bench (research prototype v0.1)
-DOI: 10.5281/zenodo.24405804
+
 A reproducible starting point for evaluating SQL-dialect translation methods in heterogeneous database migration. **This is not a production database migration system.** It does not yet migrate data, connect to live databases, prove semantic equivalence, or implement execution-based repair.
 
 ## Install and run
