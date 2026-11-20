@@ -1,6 +1,5 @@
 # AIMigrate-Bench (research prototype v0.1)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24405804.svg)](https://doi.org/10
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24405804.svg)](https://doi.org/10.5281/zenodo.24405804)
 A reproducible research benchmark for evaluating SQL-dialect translation methods in heterogeneous database migration. This is not a production migration tool. It supports rule-based translation, LLM and hybrid methods, cross-database execution checks (MySQL → PostgreSQL) on synthetic fixtures, and execution-triggered LLM repair (Phase 6). Equivalence results hold only for the included fixtures and engine versions.
 
 ## Install and run
@@ -8,7 +7,7 @@ A reproducible research benchmark for evaluating SQL-dialect translation methods
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
-pip install -e '.[test]'
+pip install -e '.[test,db]'
 pytest -q
 aimigrate --methods rule
 ```
