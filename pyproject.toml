@@ -10,6 +10,7 @@ dependencies = ["sqlglot>=25,<30"]
 [project.optional-dependencies]
 ai = ["openai>=1.50,<3"]
 test = ["pytest>=8,<10"]
+db = ["mysql-connector-python>=8", "psycopg[binary]>=3.1"]
 [project.scripts]
 aimigrate = "aimigrate.cli:main"
 [tool.setuptools.packages.find]
