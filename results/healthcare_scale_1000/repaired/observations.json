@@ -1,0 +1,302 @@
+[
+  {
+    "id": "hc01_visit_window",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 7.615,
+    "error": ""
+  },
+  {
+    "id": "hc02_treatment_days",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.015,
+    "error": ""
+  },
+  {
+    "id": "hc03_lab_missingness",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 6.255,
+    "error": ""
+  },
+  {
+    "id": "hc04_cohort_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 6.8,
+    "error": ""
+  },
+  {
+    "id": "hc05_lab_count",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 9.177,
+    "error": ""
+  },
+  {
+    "id": "hc06_null_order",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 8.217,
+    "error": ""
+  },
+  {
+    "id": "hc07_lab_abnormal",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.528,
+    "error": ""
+  },
+  {
+    "id": "hc08_month_extract",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 7.059,
+    "error": ""
+  },
+  {
+    "id": "hc09_patient_age_filter",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 6.302,
+    "error": ""
+  },
+  {
+    "id": "hc10_patient_range",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 0,
+    "target_rows": 0,
+    "duration_ms": 1.596,
+    "error": ""
+  },
+  {
+    "id": "hc11_patient_count",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1,
+    "target_rows": 1,
+    "duration_ms": 1.876,
+    "error": ""
+  },
+  {
+    "id": "hc12_patient_min_date",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1,
+    "target_rows": 1,
+    "duration_ms": 1.478,
+    "error": ""
+  },
+  {
+    "id": "hc13_patient_max_date",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1,
+    "target_rows": 1,
+    "duration_ms": 1.586,
+    "error": ""
+  },
+  {
+    "id": "hc14_patient_month",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.712,
+    "error": ""
+  },
+  {
+    "id": "hc15_patient_year",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.499,
+    "error": ""
+  },
+  {
+    "id": "hc16_date_add_month",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.15,
+    "error": ""
+  },
+  {
+    "id": "hc17_date_sub_day",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.509,
+    "error": ""
+  },
+  {
+    "id": "hc18_datediff",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.194,
+    "error": ""
+  },
+  {
+    "id": "hc19_ifnull",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.491,
+    "error": ""
+  },
+  {
+    "id": "hc20_coalesce",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.505,
+    "error": ""
+  },
+  {
+    "id": "hc21_nullif",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.242,
+    "error": ""
+  },
+  {
+    "id": "hc22_case_when",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.273,
+    "error": ""
+  },
+  {
+    "id": "hc23_distinct",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 3.908,
+    "error": ""
+  },
+  {
+    "id": "hc24_group_by",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.325,
+    "error": ""
+  },
+  {
+    "id": "hc25_having",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.401,
+    "error": ""
+  },
+  {
+    "id": "hc26_inner_join",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.338,
+    "error": ""
+  },
+  {
+    "id": "hc27_left_join",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.193,
+    "error": ""
+  },
+  {
+    "id": "hc28_subquery",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 4.531,
+    "error": ""
+  },
+  {
+    "id": "hc29_limit",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 2,
+    "target_rows": 2,
+    "duration_ms": 2.239,
+    "error": ""
+  },
+  {
+    "id": "hc30_date_format",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 8.019,
+    "error": ""
+  }
+]

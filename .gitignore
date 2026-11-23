@@ -1,28 +1,26 @@
-.env
-.env.*
-*.pem
-*.key
-certs/
-__pycache__/
-*.py[cod]
-.pytest_cache/
+# Python environments
 .venv/
 venv/
-.DS_Store
-results/
-*.backup
-*.phase3_backup
-.env
-.env.*
-*.pem
-*.key
-certs/
-results/
+
+# Python cache and build artifacts
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.venv/
-venv/
-.DS_Store
 *.egg-info/
-apply_phase31.py
+.pytest_cache/
+build/
+dist/
+
+# macOS
+.DS_Store
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+certs/
+*.pem
+*.key
+
+# Temporary files
+*.log
+*.tmp

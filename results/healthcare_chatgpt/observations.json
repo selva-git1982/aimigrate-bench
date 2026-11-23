@@ -1,0 +1,82 @@
+[
+  {
+    "id": "hc01_visit_window",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 2.996,
+    "error": ""
+  },
+  {
+    "id": "hc02_treatment_days",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 1.152,
+    "error": ""
+  },
+  {
+    "id": "hc03_lab_missingness",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 1.385,
+    "error": ""
+  },
+  {
+    "id": "hc04_cohort_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 1.009,
+    "error": ""
+  },
+  {
+    "id": "hc05_lab_count",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 1.25,
+    "error": ""
+  },
+  {
+    "id": "hc06_null_order",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 1.155,
+    "error": ""
+  },
+  {
+    "id": "hc07_lab_abnormal",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 1.032,
+    "error": ""
+  },
+  {
+    "id": "hc08_month_extract",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 4,
+    "target_rows": 4,
+    "duration_ms": 0.747,
+    "error": ""
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "hc31_patient_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 211,
+    "target_rows": 211,
+    "duration_ms": 5.002,
+    "error": ""
+  },
+  {
+    "id": "hc32_treatment_duration",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": false,
+    "source_rows": null,
+    "target_rows": null,
+    "duration_ms": 3.723,
+    "error": "CannotCoerce: cannot cast type interval to bigint\nLINE 1: SELECT patient_id, CAST(AGE(end_date, start_date) AS BIGINT)...\n                           ^"
+  },
+  {
+    "id": "hc33_conditional_aggregation",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 3,
+    "target_rows": 3,
+    "duration_ms": 1.845,
+    "error": ""
+  },
+  {
+    "id": "hc34_null_lab_handling",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.377,
+    "error": ""
+  },
+  {
+    "id": "hc35_monthly_followup",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": false,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.416,
+    "error": ""
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "hc31_patient_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 211,
+    "target_rows": 211,
+    "duration_ms": 5.397,
+    "error": ""
+  },
+  {
+    "id": "hc32_treatment_duration",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 868,
+    "target_rows": 868,
+    "duration_ms": 4.394,
+    "error": ""
+  },
+  {
+    "id": "hc33_conditional_aggregation",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 3,
+    "target_rows": 3,
+    "duration_ms": 2.515,
+    "error": ""
+  },
+  {
+    "id": "hc34_null_lab_handling",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 6.018,
+    "error": ""
+  },
+  {
+    "id": "hc35_monthly_followup",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.437,
+    "error": ""
+  },
+  {
+    "id": "hc36_multitable_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 359,
+    "target_rows": 359,
+    "duration_ms": 5.031,
+    "error": ""
+  },
+  {
+    "id": "hc37_age_group_treatment",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 2,
+    "target_rows": 2,
+    "duration_ms": 3.556,
+    "error": ""
+  },
+  {
+    "id": "hc38_null_aware_aggregation",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 3,
+    "target_rows": 3,
+    "duration_ms": 3.077,
+    "error": ""
+  },
+  {
+    "id": "hc39_year_boundary_followup",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 62,
+    "target_rows": 62,
+    "duration_ms": 1.57,
+    "error": ""
+  },
+  {
+    "id": "hc40_above_average_lab",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 456,
+    "target_rows": 456,
+    "duration_ms": 2.625,
+    "error": ""
+  }
+]

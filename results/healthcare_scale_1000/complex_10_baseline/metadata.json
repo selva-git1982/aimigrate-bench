@@ -1,0 +1,10 @@
+{
+  "source_engine": "MySQL",
+  "target_engine": "PostgreSQL",
+  "case_count": 10,
+  "successful_comparisons": 9,
+  "equivalent_cases": 7,
+  "cases_sha256": "eff8c2de6caa81c146a246d8035a8c6471adaa3cd06457fd8bf52db0f22e3b89",
+  "comparison_type": "executed_result_comparison",
+  "production_data_used": false
+}

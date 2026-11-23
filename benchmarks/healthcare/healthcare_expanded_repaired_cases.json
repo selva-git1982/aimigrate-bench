@@ -1,0 +1,212 @@
+[
+  {
+    "id": "hc01_visit_window",
+    "source_sql": "SELECT patient_id, DATE_ADD(index_date, INTERVAL 7 DAY) AS followup_date FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, (index_date + INTERVAL '7 days')::date AS followup_date FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "visit_window"
+  },
+  {
+    "id": "hc02_treatment_days",
+    "source_sql": "SELECT patient_id, DATEDIFF(end_date,start_date) AS days_on_treatment FROM hc_treatments ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, (end_date::date - start_date::date) AS days_on_treatment FROM hc_treatments ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "treatment_duration"
+  },
+  {
+    "id": "hc03_lab_missingness",
+    "source_sql": "SELECT patient_id, IFNULL(result_value, -1) AS value_or_missing FROM hc_labs ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COALESCE(result_value, -1) AS value_or_missing FROM hc_labs ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "hc04_cohort_eligibility",
+    "source_sql": "SELECT patient_id, CASE WHEN age_years >= 18 AND consent_flag = 1 THEN 1 ELSE 0 END AS eligible FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, CASE WHEN age_years >= 18 AND consent_flag = 1 THEN 1 ELSE 0 END AS eligible FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "cohort_logic"
+  },
+  {
+    "id": "hc05_lab_count",
+    "source_sql": "SELECT patient_id, COUNT(result_value) AS nonnull_labs FROM hc_labs GROUP BY patient_id ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COUNT(result_value) AS nonnull_labs FROM hc_labs GROUP BY patient_id ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "aggregation"
+  },
+  {
+    "id": "hc06_null_order",
+    "source_sql": "SELECT patient_id, result_value FROM hc_labs ORDER BY result_value, patient_id",
+    "target_sql": "SELECT patient_id, result_value FROM hc_labs ORDER BY result_value NULLS FIRST, patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "ordering"
+  },
+  {
+    "id": "hc07_lab_abnormal",
+    "source_sql": "SELECT patient_id, CASE WHEN result_value IS NULL THEN 'missing' WHEN result_value > 10 THEN 'high' ELSE 'normal' END AS status FROM hc_labs ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, CASE WHEN result_value IS NULL THEN 'missing' WHEN result_value > 10 THEN 'high' ELSE 'normal' END AS status FROM hc_labs ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "lab_classification"
+  },
+  {
+    "id": "hc08_month_extract",
+    "source_sql": "SELECT patient_id, YEAR(index_date) AS visit_year, MONTH(index_date) AS visit_month FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, EXTRACT(YEAR FROM CAST(index_date AS DATE)) AS visit_year, EXTRACT(MONTH FROM CAST(index_date AS DATE)) AS visit_month FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "temporal_extract"
+  },
+  {
+    "id": "hc09_patient_age_filter",
+    "source_sql": "SELECT patient_id FROM hc_patients WHERE patient_id > 2 ORDER BY patient_id",
+    "target_sql": "SELECT patient_id FROM hc_patients WHERE patient_id > 2 ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "patient_age_filter"
+  },
+  {
+    "id": "hc10_patient_range",
+    "source_sql": "SELECT patient_id FROM hc_patients WHERE patient_id BETWEEN 2 AND 3 ORDER BY patient_id",
+    "target_sql": "SELECT patient_id FROM hc_patients WHERE patient_id BETWEEN 2 AND 3 ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "patient_range"
+  },
+  {
+    "id": "hc11_patient_count",
+    "source_sql": "SELECT COUNT(*) AS patient_count FROM hc_patients",
+    "target_sql": "SELECT COUNT(*) AS patient_count FROM hc_patients",
+    "ordered": false,
+    "category": "patient_count"
+  },
+  {
+    "id": "hc12_patient_min_date",
+    "source_sql": "SELECT MIN(index_date) AS first_visit FROM hc_patients",
+    "target_sql": "SELECT MIN(index_date) AS first_visit FROM hc_patients",
+    "ordered": false,
+    "category": "patient_min_date"
+  },
+  {
+    "id": "hc13_patient_max_date",
+    "source_sql": "SELECT MAX(index_date) AS last_visit FROM hc_patients",
+    "target_sql": "SELECT MAX(index_date) AS last_visit FROM hc_patients",
+    "ordered": false,
+    "category": "patient_max_date"
+  },
+  {
+    "id": "hc14_patient_month",
+    "source_sql": "SELECT patient_id, MONTH(index_date) AS visit_month FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, EXTRACT(MONTH FROM index_date) AS visit_month FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "patient_month"
+  },
+  {
+    "id": "hc15_patient_year",
+    "source_sql": "SELECT patient_id, YEAR(index_date) AS visit_year FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, EXTRACT(YEAR FROM index_date) AS visit_year FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "patient_year"
+  },
+  {
+    "id": "hc16_date_add_month",
+    "source_sql": "SELECT patient_id, DATE_ADD(index_date, INTERVAL 1 MONTH) AS next_visit FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, (index_date + INTERVAL '1 month')::date AS next_visit FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "date_add_month"
+  },
+  {
+    "id": "hc17_date_sub_day",
+    "source_sql": "SELECT patient_id, DATE_SUB(index_date, INTERVAL 3 DAY) AS prior_visit FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, (index_date - INTERVAL '3 days')::date AS prior_visit FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "date_sub_day"
+  },
+  {
+    "id": "hc18_datediff",
+    "source_sql": "SELECT patient_id, DATEDIFF(end_date, start_date) AS duration FROM hc_treatments ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, (end_date::date - start_date::date) AS duration FROM hc_treatments ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "datediff"
+  },
+  {
+    "id": "hc19_ifnull",
+    "source_sql": "SELECT patient_id, IFNULL(patient_id, 0) AS safe_id FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COALESCE(patient_id, 0) AS safe_id FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "ifnull"
+  },
+  {
+    "id": "hc20_coalesce",
+    "source_sql": "SELECT patient_id, COALESCE(patient_id, 0) AS safe_id FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COALESCE(patient_id, 0) AS safe_id FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "coalesce"
+  },
+  {
+    "id": "hc21_nullif",
+    "source_sql": "SELECT patient_id, NULLIF(patient_id, 2) AS adjusted_id FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, NULLIF(patient_id, 2) AS adjusted_id FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "nullif"
+  },
+  {
+    "id": "hc22_case_when",
+    "source_sql": "SELECT patient_id, CASE WHEN patient_id > 2 THEN 'high' ELSE 'low' END AS risk_group FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, CASE WHEN patient_id > 2 THEN 'high' ELSE 'low' END AS risk_group FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "case_when"
+  },
+  {
+    "id": "hc23_distinct",
+    "source_sql": "SELECT DISTINCT patient_id FROM hc_labs ORDER BY patient_id",
+    "target_sql": "SELECT DISTINCT patient_id FROM hc_labs ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "distinct"
+  },
+  {
+    "id": "hc24_group_by",
+    "source_sql": "SELECT patient_id, COUNT(*) AS lab_count FROM hc_labs GROUP BY patient_id ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COUNT(*) AS lab_count FROM hc_labs GROUP BY patient_id ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "group_by"
+  },
+  {
+    "id": "hc25_having",
+    "source_sql": "SELECT patient_id, COUNT(*) AS lab_count FROM hc_labs GROUP BY patient_id HAVING COUNT(*) >= 1 ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COUNT(*) AS lab_count FROM hc_labs GROUP BY patient_id HAVING COUNT(*) >= 1 ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "having"
+  },
+  {
+    "id": "hc26_inner_join",
+    "source_sql": "SELECT p.patient_id, l.patient_id AS lab_patient_id FROM hc_patients p INNER JOIN hc_labs l ON p.patient_id = l.patient_id ORDER BY p.patient_id",
+    "target_sql": "SELECT p.patient_id, l.patient_id AS lab_patient_id FROM hc_patients AS p INNER JOIN hc_labs AS l ON p.patient_id = l.patient_id ORDER BY p.patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "inner_join"
+  },
+  {
+    "id": "hc27_left_join",
+    "source_sql": "SELECT p.patient_id, l.patient_id AS lab_patient_id FROM hc_patients p LEFT JOIN hc_labs l ON p.patient_id = l.patient_id ORDER BY p.patient_id",
+    "target_sql": "SELECT p.patient_id, l.patient_id AS lab_patient_id FROM hc_patients AS p LEFT JOIN hc_labs AS l ON p.patient_id = l.patient_id ORDER BY p.patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "left_join"
+  },
+  {
+    "id": "hc28_subquery",
+    "source_sql": "SELECT patient_id FROM hc_patients WHERE patient_id IN (SELECT patient_id FROM hc_labs) ORDER BY patient_id",
+    "target_sql": "SELECT patient_id FROM hc_patients WHERE patient_id IN (SELECT patient_id FROM hc_labs) ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "subquery"
+  },
+  {
+    "id": "hc29_limit",
+    "source_sql": "SELECT patient_id FROM hc_patients ORDER BY patient_id LIMIT 2",
+    "target_sql": "SELECT patient_id FROM hc_patients ORDER BY patient_id NULLS FIRST LIMIT 2",
+    "ordered": true,
+    "category": "limit"
+  },
+  {
+    "id": "hc30_date_format",
+    "source_sql": "SELECT patient_id, DATE_FORMAT(index_date, '%Y-%m') AS visit_month FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, TO_CHAR(index_date, 'YYYY-MM') AS visit_month FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "ordered": true,
+    "category": "date_format"
+  }
+]

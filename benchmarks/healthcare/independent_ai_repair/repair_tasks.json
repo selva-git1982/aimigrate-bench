@@ -1,0 +1,79 @@
+[
+  {
+    "id": "hc01_visit_window",
+    "source_sql": "SELECT patient_id, DATE_ADD(index_date, INTERVAL 7 DAY) AS followup_date FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, index_date + INTERVAL '7 DAY' AS followup_date FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "error": "",
+    "category": "visit_window"
+  },
+  {
+    "id": "hc02_treatment_days",
+    "source_sql": "SELECT patient_id, DATEDIFF(end_date,start_date) AS days_on_treatment FROM hc_treatments ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, CAST(AGE(CAST(end_date AS TIMESTAMP), CAST(start_date AS TIMESTAMP)) AS BIGINT) AS days_on_treatment FROM hc_treatments ORDER BY patient_id NULLS FIRST",
+    "error": "CannotCoerce: cannot cast type interval to bigint\nLINE 1: SELECT patient_id, CAST(AGE(CAST(end_date AS TIMESTAMP), CAS...\n                           ^",
+    "category": "treatment_duration"
+  },
+  {
+    "id": "hc08_month_extract",
+    "source_sql": "SELECT patient_id, YEAR(index_date) AS visit_year, MONTH(index_date) AS visit_month FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, YEAR(CAST(index_date AS DATE)) AS visit_year, MONTH(CAST(index_date AS DATE)) AS visit_month FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "error": "UndefinedFunction: function year(date) does not exist\nLINE 1: SELECT patient_id, YEAR(CAST(index_date AS DATE)) AS visit_y...\n                           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.",
+    "category": "temporal_extract"
+  },
+  {
+    "id": "hc14_patient_month",
+    "source_sql": "SELECT patient_id, MONTH(index_date) AS visit_month FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, MONTH(CAST(index_date AS DATE)) AS visit_month FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "error": "UndefinedFunction: function month(date) does not exist\nLINE 1: SELECT patient_id, MONTH(CAST(index_date AS DATE)) AS visit_...\n                           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.",
+    "category": "patient_month"
+  },
+  {
+    "id": "hc15_patient_year",
+    "source_sql": "SELECT patient_id, YEAR(index_date) AS visit_year FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, YEAR(CAST(index_date AS DATE)) AS visit_year FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "error": "UndefinedFunction: function year(date) does not exist\nLINE 1: SELECT patient_id, YEAR(CAST(index_date AS DATE)) AS visit_y...\n                           ^\nHINT:  No function matches the given name and argument types. You might need to add explicit type casts.",
+    "category": "patient_year"
+  },
+  {
+    "id": "hc16_date_add_month",
+    "source_sql": "SELECT patient_id, DATE_ADD(index_date, INTERVAL 1 MONTH) AS next_visit FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, index_date + INTERVAL '1 MONTH' AS next_visit FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "error": "",
+    "category": "date_add_month"
+  },
+  {
+    "id": "hc17_date_sub_day",
+    "source_sql": "SELECT patient_id, DATE_SUB(index_date, INTERVAL 3 DAY) AS prior_visit FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, index_date - INTERVAL '3 DAY' AS prior_visit FROM hc_patients ORDER BY patient_id NULLS FIRST",
+    "error": "",
+    "category": "date_sub_day"
+  },
+  {
+    "id": "hc18_datediff",
+    "source_sql": "SELECT patient_id, DATEDIFF(end_date, start_date) AS duration FROM hc_treatments ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, CAST(AGE(CAST(end_date AS TIMESTAMP), CAST(start_date AS TIMESTAMP)) AS BIGINT) AS duration FROM hc_treatments ORDER BY patient_id NULLS FIRST",
+    "error": "CannotCoerce: cannot cast type interval to bigint\nLINE 1: SELECT patient_id, CAST(AGE(CAST(end_date AS TIMESTAMP), CAS...\n                           ^",
+    "category": "datediff"
+  },
+  {
+    "id": "hc32_treatment_duration",
+    "source_sql": "SELECT patient_id, DATEDIFF(end_date, start_date) AS treatment_days FROM hc_treatments WHERE start_date IS NOT NULL AND end_date IS NOT NULL ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, CAST(AGE(end_date, start_date) AS BIGINT) AS treatment_days FROM hc_treatments WHERE start_date IS NOT NULL AND end_date IS NOT NULL ORDER BY patient_id",
+    "error": "CannotCoerce: cannot cast type interval to bigint\nLINE 1: SELECT patient_id, CAST(AGE(end_date, start_date) AS BIGINT)...\n                           ^",
+    "category": "treatment_duration"
+  },
+  {
+    "id": "hc35_monthly_followup",
+    "source_sql": "SELECT patient_id, DATE_ADD(index_date, INTERVAL 1 MONTH) AS next_visit FROM hc_patients ORDER BY patient_id",
+    "failed_target_sql": "SELECT patient_id, index_date + INTERVAL '1 MONTH' AS next_visit FROM hc_patients ORDER BY patient_id",
+    "error": "",
+    "category": "clinical_date_arithmetic"
+  },
+  {
+    "id": "hc37_age_group_treatment",
+    "source_sql": "SELECT CASE WHEN p.age_years >= 65 THEN 'senior' ELSE 'other' END AS age_group, AVG(DATEDIFF(t.end_date, t.start_date)) AS avg_days FROM hc_patients p JOIN hc_treatments t ON p.patient_id = t.patient_id WHERE p.age_years IS NOT NULL AND t.start_date IS NOT NULL AND t.end_date IS NOT NULL GROUP BY CASE WHEN p.age_years >= 65 THEN 'senior' ELSE 'other' END ORDER BY age_group",
+    "failed_target_sql": "SELECT CASE WHEN p.age_years >= 65 THEN 'senior' ELSE 'other' END AS age_group, AVG(t.end_date - t.start_date) AS avg_days FROM hc_patients p JOIN hc_treatments t ON p.patient_id = t.patient_id WHERE p.age_years IS NOT NULL AND t.start_date IS NOT NULL AND t.end_date IS NOT NULL GROUP BY CASE WHEN p.age_years >= 65 THEN 'senior' ELSE 'other' END ORDER BY age_group",
+    "error": "",
+    "category": "grouped_treatment_duration"
+  }
+]

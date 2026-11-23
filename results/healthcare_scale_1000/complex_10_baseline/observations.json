@@ -1,0 +1,102 @@
+[
+  {
+    "id": "hc31_patient_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 211,
+    "target_rows": 211,
+    "duration_ms": 4.835,
+    "error": ""
+  },
+  {
+    "id": "hc32_treatment_duration",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": false,
+    "source_rows": null,
+    "target_rows": null,
+    "duration_ms": 3.823,
+    "error": "CannotCoerce: cannot cast type interval to bigint\nLINE 1: SELECT patient_id, CAST(AGE(end_date, start_date) AS BIGINT)...\n                           ^"
+  },
+  {
+    "id": "hc33_conditional_aggregation",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 3,
+    "target_rows": 3,
+    "duration_ms": 2.157,
+    "error": ""
+  },
+  {
+    "id": "hc34_null_lab_handling",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.517,
+    "error": ""
+  },
+  {
+    "id": "hc35_monthly_followup",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": false,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.296,
+    "error": ""
+  },
+  {
+    "id": "hc36_multitable_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 359,
+    "target_rows": 359,
+    "duration_ms": 4.334,
+    "error": ""
+  },
+  {
+    "id": "hc37_age_group_treatment",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": false,
+    "source_rows": 2,
+    "target_rows": 2,
+    "duration_ms": 3.687,
+    "error": ""
+  },
+  {
+    "id": "hc38_null_aware_aggregation",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 3,
+    "target_rows": 3,
+    "duration_ms": 2.791,
+    "error": ""
+  },
+  {
+    "id": "hc39_year_boundary_followup",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 62,
+    "target_rows": 62,
+    "duration_ms": 1.84,
+    "error": ""
+  },
+  {
+    "id": "hc40_above_average_lab",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 456,
+    "target_rows": 456,
+    "duration_ms": 3.481,
+    "error": ""
+  }
+]

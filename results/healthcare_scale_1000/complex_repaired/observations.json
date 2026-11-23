@@ -1,0 +1,52 @@
+[
+  {
+    "id": "hc31_patient_eligibility",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 211,
+    "target_rows": 211,
+    "duration_ms": 5.046,
+    "error": ""
+  },
+  {
+    "id": "hc32_treatment_duration",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 868,
+    "target_rows": 868,
+    "duration_ms": 4.412,
+    "error": ""
+  },
+  {
+    "id": "hc33_conditional_aggregation",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 3,
+    "target_rows": 3,
+    "duration_ms": 1.941,
+    "error": ""
+  },
+  {
+    "id": "hc34_null_lab_handling",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 6.475,
+    "error": ""
+  },
+  {
+    "id": "hc35_monthly_followup",
+    "source_engine": "mysql",
+    "target_engine": "postgresql",
+    "equivalent": true,
+    "source_rows": 1000,
+    "target_rows": 1000,
+    "duration_ms": 5.159,
+    "error": ""
+  }
+]

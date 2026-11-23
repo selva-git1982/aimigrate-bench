@@ -1,0 +1,58 @@
+[
+  {
+    "id": "hc01_visit_window",
+    "source_sql": "SELECT patient_id, DATE_ADD(index_date, INTERVAL 7 DAY) AS followup_date FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, (index_date + INTERVAL '7 days')::date AS followup_date FROM hc_patients ORDER BY patient_id",
+    "ordered": true,
+    "category": "visit_window"
+  },
+  {
+    "id": "hc02_treatment_days",
+    "source_sql": "SELECT patient_id, DATEDIFF(end_date,start_date) AS days_on_treatment FROM hc_treatments ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, end_date - start_date AS days_on_treatment FROM hc_treatments ORDER BY patient_id",
+    "ordered": true,
+    "category": "treatment_duration"
+  },
+  {
+    "id": "hc03_lab_missingness",
+    "source_sql": "SELECT patient_id, IFNULL(result_value, -1) AS value_or_missing FROM hc_labs ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COALESCE(result_value, -1) AS value_or_missing FROM hc_labs ORDER BY patient_id",
+    "ordered": true,
+    "category": "null_handling"
+  },
+  {
+    "id": "hc04_cohort_eligibility",
+    "source_sql": "SELECT patient_id, CASE WHEN age_years >= 18 AND consent_flag = 1 THEN 1 ELSE 0 END AS eligible FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, CASE WHEN age_years >= 18 AND consent_flag = 1 THEN 1 ELSE 0 END AS eligible FROM hc_patients ORDER BY patient_id",
+    "ordered": true,
+    "category": "cohort_logic"
+  },
+  {
+    "id": "hc05_lab_count",
+    "source_sql": "SELECT patient_id, COUNT(result_value) AS nonnull_labs FROM hc_labs GROUP BY patient_id ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, COUNT(result_value) AS nonnull_labs FROM hc_labs GROUP BY patient_id ORDER BY patient_id",
+    "ordered": true,
+    "category": "aggregation"
+  },
+  {
+    "id": "hc06_null_order",
+    "source_sql": "SELECT patient_id, result_value FROM hc_labs ORDER BY result_value, patient_id",
+    "target_sql": "SELECT patient_id, result_value FROM hc_labs ORDER BY result_value NULLS FIRST, patient_id",
+    "ordered": true,
+    "category": "ordering"
+  },
+  {
+    "id": "hc07_lab_abnormal",
+    "source_sql": "SELECT patient_id, CASE WHEN result_value IS NULL THEN 'missing' WHEN result_value > 10 THEN 'high' ELSE 'normal' END AS status FROM hc_labs ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, CASE WHEN result_value IS NULL THEN 'missing' WHEN result_value > 10 THEN 'high' ELSE 'normal' END AS status FROM hc_labs ORDER BY patient_id",
+    "ordered": true,
+    "category": "lab_classification"
+  },
+  {
+    "id": "hc08_month_extract",
+    "source_sql": "SELECT patient_id, YEAR(index_date) AS visit_year, MONTH(index_date) AS visit_month FROM hc_patients ORDER BY patient_id",
+    "target_sql": "SELECT patient_id, EXTRACT(YEAR FROM index_date) AS visit_year, EXTRACT(MONTH FROM index_date) AS visit_month FROM hc_patients ORDER BY patient_id",
+    "ordered": true,
+    "category": "temporal_extract"
+  }
+]
